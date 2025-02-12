@@ -13,10 +13,13 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+      - ./backend/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   backend:
     container_name: new_debate_backend
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
     ports:
       - "5000:5000"
     depends_on:
@@ -30,7 +33,9 @@ services:
 
   frontend:
     container_name: new_debate_frontend
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
     ports:
       - "8080:8080"
     depends_on:
