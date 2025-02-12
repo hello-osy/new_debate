@@ -1,28 +1,24 @@
 <template>
   <div id="app">
-    <h1>Vue + Flask + MySQL</h1>
-    <button @click="fetchData">데이터 가져오기</button>
-    <ul v-if="data.length">
-      <li v-for="(item, index) in data" :key="index">{{ item }}</li>
-    </ul>
+    <WaitingRoom />
   </div>
 </template>
 
 <script>
+import WaitingRoom from "./components/WaitingRoom.vue";
+
 export default {
-  data() {
-    return {
-      data: [],
-    };
-  },
-  methods: {
-    fetchData() {
-      fetch("http://localhost:5000/data")
-        .then((response) => response.json())
-        .then((data) => {
-          this.data = data;
-        });
-    },
+  name: "App",
+  components: {
+    WaitingRoom,
   },
 };
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin-top: 60px;
+}
+</style>
